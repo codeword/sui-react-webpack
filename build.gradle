@@ -1,0 +1,11 @@
+
+plugins {
+  id "base"
+  id "com.moowork.node" version "1.2.0"
+}
+
+node {
+  version = '8.11.1'
+  npmVersion = '5.8.0'
+  download = true
+}
