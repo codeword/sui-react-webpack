@@ -1,0 +1,11 @@
+/*******************************
+            Button
+*******************************/
+
+/*-------------------
+       Element
+--------------------*/
+
+@backgroundColor: red;
+@textColor: white;
+@borderRadius: @defaultBorderRadius;

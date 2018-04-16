@@ -9,3 +9,34 @@ node {
   npmVersion = '5.8.0'
   download = true
 }
+
+ext {
+  outputDir = file("$projectDir/build/resources/static")
+}
+
+task webpack(
+  type: NodeTask,
+  dependsOn: npmInstall,
+  group: 'Build',
+  description: 'build semantic bundle'
+) {
+  inputs.files(npmInstall.outputs.files)
+  inputs.files(fileTree('src'))
+  inputs.files(fileTree('mySemanticTheme'))
+  inputs.file('webpack.config.js')
+  outputs.dir(outputDir)
+
+  script = file("$projectDir/node_modules/.bin/webpack")
+  args = ['--output-path', outputDir]
+}
+
+task test(dependsOn: webpack) {
+  println("configure testing")
+  doLast {
+    println("running testing")
+    println(webpack.outputs.files.files)
+    println(npmInstall.outputs.getFiles())
+  }
+}
+
+assemble.dependsOn webpack
